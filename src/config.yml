@@ -1,0 +1,37 @@
+turrets:
+  1_BLUE_NEXUS:
+    name: 'nexusprotection_1'
+    hp: 150
+    attackStrength: 3
+    allyteam: 'BLUE'
+    location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+  1_RED_NEXUS:
+    name: 'nexusprotection_1'
+    hp: 150
+    attackStrength: 3
+    allyteam: 'BLUE'
+    location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+    
+teams:
+  redTeam:
+    name: 'RedTeam'
+    type: 'RED'
+    spawnloc: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+  blueTeam:
+    name: 'BlueTeam'
+    type: 'BLUE'
+    spawnloc: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+
+champions:
+  yasuo:
+    name: 'Yasuo'
+    type: 'YASUO'
+    damage: 10
+  katarina:
+    name: 'Katarina'
+    type: 'KATARINA'
+    damage: 15
+  caytlin:
+    name: 'Caytlin'
+    type: 'CAYTLIN'
+    damage: 20
