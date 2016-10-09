@@ -1,31 +1,26 @@
 package pl.luxdev.lol.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import com.google.common.collect.Lists;
-
-import pl.luxdev.lol.managers.ConfigManager;
 import pl.luxdev.lol.types.TeamType;
-import pl.luxdev.lol.utils.Utils;
 
 public class Team {
 	
-	private boolean inGame;
-	private String name;
+	private final String name;
 	private Location spawnLocation;
-	private List<Player> players = Lists.newArrayList();
 	private TeamType type;
+	private Nexus nexus;
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Inhibitor> inhibitors = new ArrayList<Inhibitor>();
+	private ArrayList<Turret> turrets = new ArrayList<Turret>();
+	
 	
 	public Team(String s){
-		FileConfiguration yml = ConfigManager.getCfg();
-		name = yml.getString("teams." + s + ".name");
-		type = TeamType.valueOf(yml.getString("teams." + s + ".type"));
-		spawnLocation = Utils.locFromString(yml.getString("teams." + s + ".spawnloc"));
-		inGame = false;
+		name = s;
 	}
 
 	public List<Player> getPlayers() {
@@ -34,14 +29,6 @@ public class Team {
 
 	public void addPlayer(Player p) {
 		players.add(p);
-	}
-
-	public boolean isInGame() {
-		return inGame;
-	}
-
-	public void setInGame(boolean inGame) {
-		this.inGame = inGame;
 	}
 
 	public int getPlayersAmount() {
@@ -60,16 +47,52 @@ public class Team {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public TeamType getType() {
 		return type;
 	}
 
 	public void setType(TeamType type) {
 		this.type = type;
+	}
+	
+	public void setNexus(Nexus n){
+		nexus = n;
+	}
+	
+	public Nexus getNexus(){
+		return nexus;
+	}
+	
+	public ArrayList<Inhibitor> getInhibitors(){
+		return inhibitors;
+	}
+	
+	public void addInhibitor(Inhibitor i){
+		inhibitors.add(i);
+	}
+	
+	public void removeInhibitor(Inhibitor i){
+		if(inhibitors.contains(i)) inhibitors.remove(i);
+	}
+	
+	public void clearInhibitors(){
+		inhibitors.clear();
+	}
+	
+	public ArrayList<Turret> getTurrrets(){
+		return turrets;
+	}
+	
+	public void addTurret(Turret t){
+		turrets.add(t);
+	}
+	
+	public void removeTurret(Turret t){
+		if(turrets.contains(t)) turrets.remove(t);
+	}
+	
+	public void clearTurrets(){
+		turrets.clear();
 	}
 
 }

@@ -6,13 +6,18 @@ import pl.luxdev.lol.types.TeamType;
 
 public class Inhibitor {
 
+	private final String name;
 	private int hp;
 	private TeamType team;
 	private Location location;
 	private boolean destroyed;
 
 	public Inhibitor(String s){
-
+		name = s;
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 	public int getHp() {
@@ -25,6 +30,10 @@ public class Inhibitor {
 	
 	public Location getLocation() {
 		return location;
+	}
+	
+	public void setLocation(Location l){
+		location = l;
 	}
 	
 	public boolean isDestroyed() {

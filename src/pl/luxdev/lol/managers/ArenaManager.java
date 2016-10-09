@@ -1,33 +1,38 @@
 package pl.luxdev.lol.managers;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
 
 import pl.luxdev.lol.basic.Arena;
 import pl.luxdev.lol.basic.User;
-import pl.luxdev.lol.types.TeamType;
 
 public class ArenaManager {
 	
-	private static volatile CopyOnWriteArrayList<Arena> arenas = new CopyOnWriteArrayList<Arena>();
+	private static ArrayList<Arena> arenas = new ArrayList<Arena>();
 	
-	public static void addArena(Arena paramArena){
-		arenas.add(paramArena);
+	public static void addArena(Arena a){
+		arenas.add(a);
 	}
-	public static void removeArena(Arena paramArena){
-		arenas.remove(paramArena);
+	public static void removeArena(Arena a){
+		arenas.remove(a);
+	}
+	public static void clearArenas(){
+		arenas.clear();
 	}
 	public static Arena[] getAllArenas(){
 		return arenas.toArray(new Arena[arenas.size()]);
 	}
-	public static Arena getArenaByName(String paramString){
-		for(Arena paramArena : arenas){
-			if(paramArena.getName().equalsIgnoreCase(paramString)) return paramArena;
+	public static ArrayList<Arena> getArenas(){
+		return arenas;
+	}
+	public static Arena getArenaByName(String s){
+		for(Arena a : arenas){
+			if(a.getName().equalsIgnoreCase(s)) return a;
 		}
 		return null;	
 	}
 	public static Arena getArenaByUser(User u){
-		for(Arena paramArena : arenas){
-			if(paramArena.getUsers().contains(u)) return paramArena;
+		for(Arena a : arenas){
+			if(a.getUsers().contains(u)) return a;
 		}
 		return null;
 	}

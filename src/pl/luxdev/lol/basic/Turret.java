@@ -1,10 +1,8 @@
 package pl.luxdev.lol.basic;
 
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 
-import pl.luxdev.lol.managers.ConfigManager;
 import pl.luxdev.lol.types.LineType;
 import pl.luxdev.lol.types.TeamType;
 
@@ -21,12 +19,7 @@ public class Turret {
 	private Hologram hologram;
 	
 	public Turret(String s){
-		FileConfiguration yml = ConfigManager.getCfg();
-		name = yml.getString("turrets." + s + ".location");
-//		hp = yml.getInt("turrets." + s + ".hp");
-//		attackStrength = yml.getInt("turrets." + s + ".attackStrength");
-//		team = TeamType.valueOf(yml.getString("turrets." + s + ".allyteam"));
-//		location = Utils.locFromString(yml.getString("turrets." + s + ".location"));
+		name = s;
 	}
 	public String getName() {
 		return name;
@@ -36,9 +29,6 @@ public class Turret {
 	}
 	public void setHp(int hp) {
 		this.hp = hp;
-	}
-	public Location getLocation() {
-		return location;
 	}
 	public int getAttackStrength() {
 		return attackStrength;
@@ -52,13 +42,18 @@ public class Turret {
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
+	public Location getLocation(){
+		return location;
+	}
+	public void setLocation(Location l){
+		location = l;
+	}
 	public TeamType getTeam() {
 		return team;
 	}
 	public void setTeam(TeamType t) {
 		team = t;
 	}
-	
 	public LineType getLine() {
 		return line;
 	}

@@ -31,6 +31,7 @@ public class PlayerAttackTurretList implements Listener {
 		}
 		if (paramTurret.isDestroyed()) {
 			e.getPlayer().sendMessage("§cTa wieza jest juz zniszczona.");
+			e.setCancelled(true);
 			return;
 		}
 		if (paramTurret.getHp() <= 10) {

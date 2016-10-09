@@ -18,7 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.minecraft.server.v1_8_R1.EntityInsentient;
-import pl.luxdev.lol.entities.PathFinderGoalWalkTo;
+import net.minecraft.server.v1_8_R1.PathEntity;
 import pl.luxdev.lol.listeners.EntityExplodeList;
 import pl.luxdev.lol.listeners.PlayerAttackTurretList;
 import pl.luxdev.lol.listeners.PlayerInteractList;
@@ -57,7 +57,9 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private static void SpawnMiniontest(World world, Location spawn, Location walkTo){
 		Squid squid = world.spawn(spawn, Squid.class);
-		
+		PathEntity p = ((EntityInsentient) squid).getNavigation().a(walkTo.getX(), walkTo.getY(), walkTo.getZ());
+		p.a();
+		//ogarniam powoli temat...
 		Bukkit.broadcastMessage("Zrespiono moba, idzie sb tam gdzies xD");
 	}
 	

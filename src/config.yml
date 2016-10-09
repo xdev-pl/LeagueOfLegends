@@ -9,20 +9,17 @@ arenas:
           hp: 500
           location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
         inhibitors:
-          INHIBITOR_TOP:
+          TOP:
             name: 'Inhibitor Top'
             hp: 300
-            line: 'TOP'
             location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
-          INHIBITOR_MID:
+          MID:
             name: 'Inhibitor Mid'
             hp: 300
-            line: 'MID'
             location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
-          INHIBITOR_BOT:
+          BOT:
             name: 'Inhibitor Bot'
             hp: 300
-            line: 'BOT'
             location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
         turrets:
           TURRET_TOP_1:

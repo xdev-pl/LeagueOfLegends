@@ -9,12 +9,11 @@ import org.bukkit.entity.Player;
 import pl.luxdev.lol.types.GameState;
 
 public class Arena {
-	//chyba narazie jest ok
 	private final String name;
 	private String displayName;
 	private GameState state;
 	private List<User> users = new ArrayList<>();
-	private List<Location> spawns = new ArrayList<Location>(2);
+	private List<Team> teams = new ArrayList<Team>(2);
 	
 	public Arena(String n){
 		name = n;
@@ -41,23 +40,16 @@ public class Arena {
 		return state;
 	}
 	
-	public void setSpawns(List<Location> l){
-		spawns.clear();
-		for (int i = 0; i < l.size(); i++) {
-			spawns.add(l.get(i));
-		}
+	public List<Team> getTeams(){
+		return teams;
 	}
 	
-	public void setSpawn(int i, Location l){
-		spawns.set(i, l);
+	public void addTeam(Team t){
+		teams.add(t);
 	}
 	
-	public List<Location> getLocs(){
-		return spawns;
-	}
-	
-	public Location getLoc(int i){
-		return spawns.get(i);
+	public void removeTeam(Team t){
+		if(teams.contains(t)) teams.remove(t);
 	}
 	
 	public List<User> getUsers(){
