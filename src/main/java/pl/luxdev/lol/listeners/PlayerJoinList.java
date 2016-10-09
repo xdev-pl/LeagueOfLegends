@@ -15,7 +15,7 @@ import pl.luxdev.lol.managers.UserManager;
 import pl.luxdev.lol.types.ChampType;
 import pl.luxdev.lol.utils.ItemCrafter;
 
-public class PlayerJoinList implements Listener{
+public class PlayerJoinList implements Listener {
 	
 	public static ItemStack BlueTeamPicker = ItemCrafter.createItem(Material.INK_SACK, 1, (short) 12, ("§8[§6Wybierz TeamType§8]"), ("§7Team: §bBLUE"));
 	public static ItemStack RedTeamPicker = ItemCrafter.createItem(Material.INK_SACK, 1, (short) 1, ("§8[§6Wybierz TeamType§8]"), ("§7Team: §cRED"));
@@ -38,12 +38,11 @@ public class PlayerJoinList implements Listener{
 		title.send(p);
 		
 	}
-	private void addItems(Player p){
+	private void addItems(Player p) {
 		Inventory inv = p.getInventory();
 		inv.clear();
 		inv.setItem(0, BlueTeamPicker);
 		inv.setItem(8, RedTeamPicker);
-		
 	}
 
 }

@@ -48,7 +48,7 @@ public class Utils {
 	private static Logger logger;
 
 	public static Logger getLogger(){
-		if(logger == null) logger = Main.getInst().getLogger();
+		if(logger == null) logger = Main.getInstance().getLogger();
 		return logger;
 	}
 	
@@ -88,10 +88,14 @@ public class Utils {
 		Location loc = turret.getLocation();
 		Material mat = loc.subtract(0, 1,0).getBlock().getType();
 		switch(mat){
-			case DIAMOND_BLOCK: return LineType.TOP;
-			case GOLD_BLOCK: return LineType.BOT;
-			case EMERALD_BLOCK: return LineType.MID;
-			case COAL_BLOCK: return LineType.BASE;
+			case DIAMOND_BLOCK:
+				return LineType.TOP;
+			case GOLD_BLOCK:
+				return LineType.BOT;
+			case EMERALD_BLOCK:
+				return LineType.MID;
+			case COAL_BLOCK:
+				return LineType.BASE;
 		default:
 			break;
 		}

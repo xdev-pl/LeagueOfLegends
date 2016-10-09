@@ -14,9 +14,9 @@ public class Team {
 	private Location spawnLocation;
 	private TeamType type;
 	private Nexus nexus;
-	private ArrayList<Player> players = new ArrayList<Player>();
-	private ArrayList<Inhibitor> inhibitors = new ArrayList<Inhibitor>();
-	private ArrayList<Turret> turrets = new ArrayList<Turret>();
+	private ArrayList<Player> players = new ArrayList<>();
+	private ArrayList<Inhibitor> inhibitors = new ArrayList<>();
+	private ArrayList<Turret> turrets = new ArrayList<>();
 	
 	
 	public Team(String s){

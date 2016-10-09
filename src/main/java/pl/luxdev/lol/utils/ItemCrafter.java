@@ -13,19 +13,18 @@ public class ItemCrafter {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(displayname);
-		ArrayList<String> Lore = new ArrayList<String>();
+		ArrayList<String> Lore = new ArrayList<>();
 		Lore.add(lore);
 		meta.setLore(Lore);
 		item.setItemMeta(meta);
 		return item;
 	}
 
-	public static ItemStack createItemWE(Material material, int amount, short data, String displayname, String lore,
-			Enchantment ent, int entl) {
+	public static ItemStack createItemWE(Material material, int amount, short data, String displayname, String lore, Enchantment ent, int entl) {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(displayname);
-		ArrayList<String> Lore = new ArrayList<String>();
+		ArrayList<String> Lore = new ArrayList<>();
 		Lore.add(lore);
 		meta.setLore(Lore);
 		item.setItemMeta(meta);

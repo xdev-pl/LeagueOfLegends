@@ -14,27 +14,35 @@ public class Nexus {
 	public Nexus(){
 		
 	}
+
 	public Location getLocation() {
 		return location;
 	}
+
 	public void setLocation(Location l) {
 		location = l;
 	}
+
 	public int getHp() {
 		return hp;
 	}
+
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
+
 	public boolean isDestroyed() {
 		return destroyed;
 	}
+
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
+
 	public TeamType getTeam() {
 		return team;
 	}
+
 	public void setTeam(TeamType t) {
 		team = t;
 	}

@@ -8,12 +8,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.util.Vector;
 
+@SuppressWarnings("deprecation")
 public class EntityExplodeList implements Listener {
 
 	@EventHandler
 	public void onExplode(EntityExplodeEvent e) {
-		for(Block b : e.blockList()){
-			@SuppressWarnings("deprecation")
+		for (Block b : e.blockList()) {
 			FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
 			b.setType(Material.AIR);
 			float x = (float) 0.1 + (float) (Math.random() * 0.4);

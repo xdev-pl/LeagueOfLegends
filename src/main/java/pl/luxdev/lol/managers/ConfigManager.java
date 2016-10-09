@@ -16,24 +16,25 @@ import pl.luxdev.lol.types.TeamType;
 import pl.luxdev.lol.utils.Utils;
 
 public class ConfigManager {
-private static FileConfiguration config = null;
+
+	private static FileConfiguration config = null;
 	
-	public static void load(){
+	public static void load() {
 		FileManager.checkFiles();
-		config = Main.getInst().getConfig();
+		config = Main.getInstance().getConfig();
 		loadChampions();
 		loadArenas();
 		count();
 	}
 	
-	public static FileConfiguration getCfg(){
-		if(Main.getInst().getConfig() == null) load();
+	public static FileConfiguration getCfg() {
+		if(Main.getInstance().getConfig() == null) load();
 		return config;
 	}
 	
-	private static void loadChampions(){
+	private static void loadChampions() {
 		ChampionManager.clearChampions();
-		for(String s : getCfg().getConfigurationSection("champions").getKeys(false)){
+		for (String s : getCfg().getConfigurationSection("champions").getKeys(false)) {
 			Utils.info("Loading champion: " + s);
 			Champion c = new Champion(s);
 			c.setDamage(getCfg().getInt("champions."+s+".damage"));
@@ -46,7 +47,7 @@ private static FileConfiguration config = null;
 	
 	private static void loadArenas() {
 		ArenaManager.clearArenas();
-		for(String s : getCfg().getConfigurationSection("arenas").getKeys(false)){
+		for (String s : getCfg().getConfigurationSection("arenas").getKeys(false)) {
 			Utils.info("Loading arena: " + s);
 			Arena a = new Arena(s);
 			a.setDisplayName(getCfg().getString("arenas."+s+".name"));
@@ -60,7 +61,7 @@ private static FileConfiguration config = null;
 	}
 	
 	private static void loadTeams(Arena a) {
-		for(String s : getCfg().getConfigurationSection("arenas."+a.getName()+".teams").getKeys(false)){
+		for (String s : getCfg().getConfigurationSection("arenas."+a.getName()+".teams").getKeys(false)) {
 			Utils.info("Loading team: " + s);
 			Team t = new Team(getCfg().getString("arenas."+a.getName()+".teams."+s+".name"));
 			t.setType(TeamType.valueOf(s));
@@ -69,8 +70,8 @@ private static FileConfiguration config = null;
 		}
 	}
 	
-	private static void loadNexus(Arena a){
-		for(Team t : a.getTeams()){
+	private static void loadNexus(Arena a) {
+		for (Team t : a.getTeams()) {
 			Utils.info("Loading nexus: " + t.getName());
 			Nexus n = new Nexus();
 			n.setDestroyed(false);
@@ -81,8 +82,8 @@ private static FileConfiguration config = null;
 		}
 	}
 	
-	private static void loadInhibitors(Arena a){
-		for(Team t : a.getTeams()){
+	private static void loadInhibitors(Arena a) {
+		for (Team t : a.getTeams()) {
 			for(String s : getCfg().getConfigurationSection("arenas."+a.getName()+".teams."+t.getType()+".inhibitors").getKeys(false)){
 				Inhibitor i = new Inhibitor(getCfg().getString("arenas."+a.getName()+".teams."+t.getType()+".inhibitors."+s+".name"));
 				Utils.info("Loading inhibitor: " + i.getName());
@@ -95,9 +96,9 @@ private static FileConfiguration config = null;
 		}
 	}
 	
-	private static void loadTurrets(Arena a){
-		for(Team tm : a.getTeams()){
-			for(String s : getCfg().getConfigurationSection("arenas."+a.getName()+".teams."+tm.getType()+".turrets").getKeys(false)){
+	private static void loadTurrets(Arena a) {
+		for (Team tm : a.getTeams()) {
+			for (String s : getCfg().getConfigurationSection("arenas."+a.getName()+".teams."+tm.getType()+".turrets").getKeys(false)) {
 				Turret t = new Turret(getCfg().getString("arenas."+a.getName()+".teams."+tm.getType()+".turrets."+s+".name"));
 				Utils.info("Loading turret: " + t.getName());
 				t.setDestroyed(false);
@@ -113,13 +114,13 @@ private static FileConfiguration config = null;
 		}
 	}
 	
-	private static void count(){
+	private static void count() {
 		Utils.info("Loaded "+ArenaManager.getArenas().size()+" arenas");
 		int teams = 0;
 		int nexus = 0;
 		int inhibitors = 0;
 		int turrets = 0;
-		for(Arena a : ArenaManager.getArenas()){
+		for(Arena a : ArenaManager.getArenas()) {
 			teams += a.getTeams().size();
 			for(Team t : a.getTeams()){
 				if(t.getNexus() != null) nexus++;

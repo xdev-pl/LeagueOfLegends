@@ -14,11 +14,14 @@ import pl.luxdev.lol.utils.PacketUtils;
 import pl.luxdev.lol.utils.Reflection;
 
 public class Hologram {
+
 	/*
 	 * Holograms By Dzikoysk Dziku najlepszy programista nie bedzie zly na mnie
 	 * ;) :3 <3
 	 */
-	public static List<Hologram> holograms = new ArrayList<>();
+
+	private final static List<Hologram> holograms = new ArrayList<>();
+
 	private static final double distance = 3;
 	private String id;
 	private List<String> lines;
@@ -34,10 +37,11 @@ public class Hologram {
 	}
 
 	public static Hologram get(String id) {
-		for (Hologram h : holograms)
+		for (Hologram h : holograms) {
 			if (h.getID().equals(id)) {
 				return h;
 			}
+		}
 		return null;
 	}
 
@@ -49,8 +53,9 @@ public class Hologram {
 			e.printStackTrace();
 		}
 		this.lines.addAll(Arrays.asList(lines));
-		if (this.location != null)
+		if (this.location != null) {
 			show(this.location);
+		}
 	}
 
 	public Location getLocation() {
@@ -58,8 +63,9 @@ public class Hologram {
 	}
 
 	public void show(Location loc) {
-		if (this.lines == null)
+		if (this.lines == null) {
 			return;
+		}
 		Location first = loc.clone().add(0, (this.lines.size() / 2) * distance, 0);
 		for (int i = 0; i < this.lines.size(); i++) {
 			ids.addAll(showLine(first.clone(), this.lines.get(i)));
@@ -90,18 +96,21 @@ public class Hologram {
 					e.printStackTrace();
 				}
 			}
-		}.runTaskLater(Main.getInst(), sec * 20);
+		}.runTaskLater(Main.getInstance(), sec * 20);
 	}
 
 	public void destroy() throws Exception {
 		int[] ints = new int[ids.size()];
-		for (int j = 0; j < ints.length; j++)
-			if (j != 0)
+		for (int j = 0; j < ints.length; j++) {
+			if (j != 0) {
 				ints[j] = ids.get(j);
+			}
+		}
 		Class<?> packetDestroy = Reflection.getCraftClass("PacketPlayOutEntityDestroy");
 		Object packet = packetDestroy.getConstructor(new Class<?>[] { int[].class }).newInstance(ints);
-		for (Player p : Bukkit.getOnlinePlayers())
+		for (Player p : Bukkit.getOnlinePlayers()) {
 			PacketUtils.sendPacket(p, packet);
+		}
 		this.ids.clear();
 	}
 
@@ -186,7 +195,6 @@ public class Hologram {
 		try {
 			destroy();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

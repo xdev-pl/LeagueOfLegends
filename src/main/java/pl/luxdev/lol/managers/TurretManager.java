@@ -9,20 +9,23 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import pl.luxdev.lol.basic.Turret;
+
 public class TurretManager {
 
-	private static List<Turret> turrets = new CopyOnWriteArrayList<Turret>();
+	private static List<Turret> turrets = new CopyOnWriteArrayList<>();
 
 	public static List<Turret> getAllTurrets() {
 		return turrets;
 	}
 	
-	public static void clearTurrets(){
+	public static void clearTurrets() {
 		turrets.clear();
 	}
-	public static void getPlayersOnTurretArea(Turret turret){
+
+	public static void getPlayersOnTurretArea(Turret turret) {
 		
 	}
+
 	public static void addTurret(Turret turret) {
 		turrets.add(turret);
 	}
@@ -55,7 +58,7 @@ public class TurretManager {
 		int xCoord = (int) l.getX();
 		int zCoord = (int) l.getZ();
 		int YCoord = (int) l.getY();
-		List<Location> tempList = new ArrayList<Location>();
+		List<Location> tempList = new ArrayList<>();
 		for (int x = -radius; x <= radius; x++) {
 			for (int z = -radius; z <= radius; z++) {
 				for (int y = -radius; y <= radius; y++) {
