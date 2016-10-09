@@ -1,7 +1,5 @@
 package pl.luxdev.lol.listeners;
 
-import java.util.ArrayList;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
@@ -15,8 +13,8 @@ public class EntityExplodeList implements Listener {
 	@EventHandler
 	public void onExplode(EntityExplodeEvent e) {
 		for(Block b : e.blockList()){
-			FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(),
-					b.getType(), b.getData());
+			@SuppressWarnings("deprecation")
+			FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
 			b.setType(Material.AIR);
 			float x = (float) 0.1 + (float) (Math.random() * 0.4);
 			double y = 0.5;// (float) -5 + (float)(Math.random() * ((5 - -5) + 1));

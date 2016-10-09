@@ -2,6 +2,6 @@ package pl.luxdev.lol.types;
 
 public enum ChampType {
 	
-	YASUO, KATARINA, CAYTLIN, ZADNA;
+	YASUO, KATARINA, CAYTLIN, NONE;
 
 }

@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Lists;
 
-import pl.luxdev.lol.managers.DataManager;
+import pl.luxdev.lol.managers.ConfigManager;
 import pl.luxdev.lol.types.TeamType;
 import pl.luxdev.lol.utils.Utils;
 
@@ -21,7 +21,7 @@ public class Team {
 	private TeamType type;
 	
 	public Team(String s){
-		FileConfiguration yml = DataManager.getCfg();
+		FileConfiguration yml = ConfigManager.getCfg();
 		name = yml.getString("teams." + s + ".name");
 		type = TeamType.valueOf(yml.getString("teams." + s + ".type"));
 		spawnLocation = Utils.locFromString(yml.getString("teams." + s + ".spawnloc"));

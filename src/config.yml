@@ -1,26 +1,89 @@
-turrets:
-  1_BLUE_NEXUS:
-    name: 'nexusprotection_1'
-    hp: 150
-    attackStrength: 3
-    allyteam: 'BLUE'
-    location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
-  1_RED_NEXUS:
-    name: 'nexusprotection_1'
-    hp: 150
-    attackStrength: 3
-    allyteam: 'BLUE'
-    location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
-    
-teams:
-  redTeam:
-    name: 'RedTeam'
-    type: 'RED'
-    spawnloc: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
-  blueTeam:
-    name: 'BlueTeam'
-    type: 'BLUE'
-    spawnloc: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+arenas:
+  ARENA_1:
+    name: 'Arena 1'
+    teams:
+      RED:
+        name: 'RedTeam'
+        spawnloc: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+        nexus:
+          hp: 500
+          location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+        inhibitors:
+          INHIBITOR_TOP:
+            name: 'Inhibitor Top'
+            hp: 300
+            line: 'TOP'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          INHIBITOR_MID:
+            name: 'Inhibitor Mid'
+            hp: 300
+            line: 'MID'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          INHIBITOR_BOT:
+            name: 'Inhibitor Bot'
+            hp: 300
+            line: 'BOT'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+        turrets:
+          TURRET_TOP_1:
+            name: 'Turret Top 1'
+            hp: 150
+            attackStrength: 3
+            line: 'TOP'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          TURRET_MID_1:
+            name: 'Turret Mid 1'
+            hp: 150
+            attackStrength: 3
+            line: 'MID'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          TURRET_BOT_1:
+            name: 'Turret Bot 1'
+            hp: 150
+            attackStrength: 3
+            line: 'BOT'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+      BLUE:
+        name: 'BlueTeam'
+        spawnloc: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+        nexus:
+          hp: 300
+          location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+        inhibitors:
+          INHIBITOR_TOP:
+            name: 'Inhibitor Top'
+            hp: 300
+            line: 'TOP'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          INHIBITOR_MID:
+            name: 'Inhibitor Mid'
+            hp: 300
+            line: 'MID'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          INHIBITOR_BOT:
+            name: 'Inhibitor Bot'
+            hp: 300
+            line: 'BOT'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+        turrets:
+          TURRET_TOP_1:
+            name: 'Turret Top 1'
+            hp: 150
+            attackStrength: 3
+            line: 'TOP'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          TURRET_MID_1:
+            name: 'Turret Mid 1'
+            hp: 150
+            attackStrength: 3
+            line: 'MID'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
+          TURRET_BOT_1:
+            name: 'Turret Bot 1'
+            hp: 150
+            attackStrength: 3
+            line: 'BOT'
+            location: 'leagueoflegends -1297.5 4.5 -1558.5 0.0 0.0'
 
 champions:
   yasuo:

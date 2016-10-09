@@ -1,2 +1,2 @@
 # LeagueOfLegends
-Liga legend w minecraft, nie możliwe, ale warto spróbować :)
+Liga legend w minecraft, niemożliwe, ale warto spróbować :)

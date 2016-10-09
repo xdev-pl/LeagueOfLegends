@@ -2,8 +2,7 @@ package pl.luxdev.lol.basic;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import pl.luxdev.lol.Main;
-import pl.luxdev.lol.managers.DataManager;
+import pl.luxdev.lol.managers.ConfigManager;
 import pl.luxdev.lol.types.ChampType;
 
 public class Champion {
@@ -13,7 +12,7 @@ public class Champion {
 	private int damage;
 
 	public Champion(String s) {
-		FileConfiguration yml = DataManager.getCfg();
+		FileConfiguration yml = ConfigManager.getCfg();
 		name = yml.getString("champions." + s + ".name");
 		type = ChampType.valueOf(yml.getString("champions." + s + ".type"));
 		damage = yml.getInt("champions." + s + ".damage");

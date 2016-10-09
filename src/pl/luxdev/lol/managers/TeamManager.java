@@ -3,8 +3,6 @@ package pl.luxdev.lol.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.entity.Player;
-
 import pl.luxdev.lol.basic.Team;
 import pl.luxdev.lol.basic.User;
 
