@@ -55,7 +55,7 @@
 		<finalName>${project.name} v${project.version}</finalName>
 		<resources>
 			<resource>
-				<directory>${basedir}/src/main/resources</directory>
+				<directory>${basedir}/resources</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
