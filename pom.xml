@@ -1,9 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>pl.luxdev.lol</groupId>
-	<artifactId>leagueoflegends</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+
 	<name>LeagueOfLegends</name>
+	<groupId>pl.luxdev</groupId>
+	<artifactId>lol</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<repositories>
 		<repository>
@@ -48,45 +51,38 @@
 	</dependencies>
 
 	<build>
-		<defaultGoal>clean package</defaultGoal>
-		<sourceDirectory>src</sourceDirectory>
-
+		<defaultGoal>clean install</defaultGoal>
+		<finalName>${project.name} v${project.version}</finalName>
 		<resources>
 			<resource>
-				<targetPath>.</targetPath>
+				<directory>${basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
-				<directory>${basedir}/src/</directory>
-				
-				<includes>
-					<include>config.yml</include>
-					<include>plugin.yml</include>
-				</includes>
 			</resource>
 		</resources>
-
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.1</version>
 				<configuration>
-					<fork>true</fork>
-					<!-- <executable>C:\Program Files\Java\jdk1.8.0_65\bin\javac.exe</executable> -->
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Built-By>AdversTM</Built-By>
-							<!-- <mode>development</mode> -->
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+
 </project>

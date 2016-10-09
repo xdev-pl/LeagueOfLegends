@@ -1,0 +1,5 @@
+main: pl.luxdev.lol.Main
+version: ${project.version}
+description: Plugin na lola hah, its impossible.
+author: luxDev, AdversTM, ProgrammingWizzard
+name: ${project.name}
