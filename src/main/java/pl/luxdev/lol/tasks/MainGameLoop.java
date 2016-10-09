@@ -27,11 +27,11 @@ public class MainGameLoop implements Runnable{
 				if (en instanceof Player){
 					Player p = (Player) en;
 					User u = UserManager.getUser(p.getName());
-					if(p.getLocation().distance(turret.getLocation()) <= 10 && p.getGameMode() == GameMode.SURVIVAL){
-						if(turret.isDestroyed()){
+					if (p.getLocation().distance(turret.getLocation()) <= 10 && p.getGameMode() == GameMode.SURVIVAL) {
+						if (turret.isDestroyed()){
 							return;
 						}
-						if(turret.getTeam() == u.getTeam()){
+						if (turret.getTeam() == u.getTeam()) {
 							return;
 						}
 						p.setHealth(p.getHealth() -turret.getAttackStrength());
