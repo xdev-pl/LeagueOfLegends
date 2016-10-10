@@ -13,7 +13,7 @@ public class ChampionManager {
 		champions.add(c);
 	}
 
-	public void removeChampion(Champion c) {
+	public static void removeChampion(Champion c) {
 		champions.remove(c);
 	}
 

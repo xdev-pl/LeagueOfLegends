@@ -35,7 +35,7 @@ public class MainGameLoop implements Runnable{
 							return;
 						}
 						p.setHealth(p.getHealth() -turret.getAttackStrength());
-						p.playSound(p.getLocation(), Sound.HURT_FLESH, 2F, 3F);
+						p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_HURT, 2F, 3F);
 					}
 				}
 			}

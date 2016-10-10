@@ -2,10 +2,10 @@ package pl.luxdev.lol.entities;
 
 import org.bukkit.Location;
 
-import net.minecraft.server.v1_8_R1.EntityInsentient;
-import net.minecraft.server.v1_8_R1.Navigation;
-import net.minecraft.server.v1_8_R1.PathEntity;
-import net.minecraft.server.v1_8_R1.PathfinderGoal;
+import net.minecraft.server.v1_10_R1.EntityInsentient;
+import net.minecraft.server.v1_10_R1.Navigation;
+import net.minecraft.server.v1_10_R1.PathEntity;
+import net.minecraft.server.v1_10_R1.PathfinderGoal;
 
 public class PathFinderGoalWalkTo extends PathfinderGoal {
 
