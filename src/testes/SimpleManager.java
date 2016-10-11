@@ -1,4 +1,4 @@
-package pl.luxdev.testes;
+package testes;
 
 import java.io.File;
 import java.util.ArrayList;

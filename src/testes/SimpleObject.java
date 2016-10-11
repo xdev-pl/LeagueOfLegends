@@ -1,4 +1,4 @@
-package pl.luxdev.testes;
+package testes;
 
 public class SimpleObject {
 

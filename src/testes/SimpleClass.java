@@ -1,4 +1,4 @@
-package pl.luxdev.testes;
+package testes;
 
 @SuppressWarnings("unchecked")
 public class SimpleClass {

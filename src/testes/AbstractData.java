@@ -1,4 +1,4 @@
-package pl.luxdev.testes;
+package testes;
 
 import java.io.File;
 import java.util.List;
@@ -15,7 +15,7 @@ public abstract class AbstractData<T> {
         this.getBasicList().parallelStream().forEach(this::save);
     }
 
-    public List<T> getFilteredList(Predicate<T>... predicates) {
+	public List<T> getFilteredList(Predicate<T>... predicates) {
         List<T> result = this.getBasicList();
         for (Predicate<T> predicate : predicates) {
             result = result.stream().filter(predicate::test).collect(Collectors.toList());

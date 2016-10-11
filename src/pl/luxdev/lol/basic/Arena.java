@@ -3,7 +3,6 @@ package pl.luxdev.lol.basic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import pl.luxdev.lol.types.GameState;
