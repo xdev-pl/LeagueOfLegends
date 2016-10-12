@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import pl.luxdev.lol.basic.Turret;
+import pl.luxdev.lol.basic.game.Turret;
 import pl.luxdev.lol.events.PlayerAttackTurretEvent;
 import pl.luxdev.lol.managers.TurretManager;
 

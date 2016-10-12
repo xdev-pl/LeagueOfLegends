@@ -3,12 +3,12 @@ package pl.luxdev.lol.managers;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import pl.luxdev.lol.Main;
-import pl.luxdev.lol.basic.Arena;
-import pl.luxdev.lol.basic.Champion;
-import pl.luxdev.lol.basic.Inhibitor;
-import pl.luxdev.lol.basic.Nexus;
-import pl.luxdev.lol.basic.Team;
-import pl.luxdev.lol.basic.Turret;
+import pl.luxdev.lol.basic.game.Arena;
+import pl.luxdev.lol.basic.game.Champion;
+import pl.luxdev.lol.basic.game.Inhibitor;
+import pl.luxdev.lol.basic.game.Nexus;
+import pl.luxdev.lol.basic.game.Team;
+import pl.luxdev.lol.basic.game.Turret;
 import pl.luxdev.lol.types.ChampType;
 import pl.luxdev.lol.types.GameState;
 import pl.luxdev.lol.types.LineType;
@@ -65,7 +65,7 @@ public class ConfigManager {
 			Utils.info("Loading team: " + s);
 			Team t = new Team(getCfg().getString("arenas."+a.getName()+".teams."+s+".name"));
 			t.setType(TeamType.valueOf(s));
-			t.setSpawnLocation(Utils.locFromString(getCfg().getString("arenas."+a.getName()+".teams"+s+".spawnloc")));
+			t.setSpawnLocation(Utils.locFromString(getCfg().getString("arenas."+a.getName()+".teams."+s+".spawnloc")));
 			a.addTeam(t);
 		}
 	}
@@ -77,7 +77,7 @@ public class ConfigManager {
 			n.setDestroyed(false);
 			n.setTeam(t.getType());
 			n.setHp(getCfg().getInt("arenas."+a.getName()+".teams."+t.getType()+".nexus.hp"));
-			n.setLocation(Utils.locFromString(getCfg().getString("arenas."+a.getName()+".teams"+t.getType()+".nexus.location")));
+			n.setLocation(Utils.locFromString(getCfg().getString("arenas."+a.getName()+".teams."+t.getType()+".nexus.location")));
 			t.setNexus(n);
 		}
 	}

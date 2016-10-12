@@ -4,15 +4,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
+import com.google.common.collect.Lists;
+
 import pl.luxdev.lol.Main;
-import pl.luxdev.lol.basic.Turret;
+import pl.luxdev.lol.basic.game.Turret;
 import pl.luxdev.lol.types.LineType;
 
 public class Utils {
@@ -43,6 +47,21 @@ public class Utils {
 	
 	public static String toJson(String s){
 		return "{\"text\": \"" + s + "\"}";
+	}
+	
+	public static String fixColors(String msg) {
+		if(msg == null) return msg;
+		msg = ChatColor.translateAlternateColorCodes('&', msg);
+		msg = msg.replace("%ok", "✓");
+		msg = msg.replace("%nieok", "✗");
+		msg = msg.replace("%>", "»");
+		return msg;
+	}
+	
+	public static List<String> fixColoredList(List<String> coloredList) {
+		final List<String> list = Lists.newArrayList();
+		for (String str : coloredList) list.add(fixColors(str));
+		return list;
 	}
 	
 	private static Logger logger;

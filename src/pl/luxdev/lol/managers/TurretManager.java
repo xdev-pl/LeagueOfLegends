@@ -8,7 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import pl.luxdev.lol.basic.Turret;
+import pl.luxdev.lol.basic.game.Turret;
 
 public class TurretManager {
 

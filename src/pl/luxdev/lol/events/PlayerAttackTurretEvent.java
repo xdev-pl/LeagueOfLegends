@@ -6,11 +6,11 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import pl.luxdev.lol.basic.Turret;
+import pl.luxdev.lol.basic.game.Turret;
 
 public class PlayerAttackTurretEvent extends Event implements Cancellable {
 
-	private static final HandlerList handlers = new HandlerList();
+	public static final HandlerList handlers = new HandlerList();
 
 	private final Player p;
 	private final Turret t;
@@ -37,7 +37,7 @@ public class PlayerAttackTurretEvent extends Event implements Cancellable {
 		return this.t;
 	}
 	
-	public HandlerList getHandlers() {
+	public HandlerList getHandlerList() {
 		return handlers;
 	}
 
@@ -49,5 +49,11 @@ public class PlayerAttackTurretEvent extends Event implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

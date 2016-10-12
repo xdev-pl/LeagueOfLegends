@@ -2,8 +2,8 @@ package pl.luxdev.lol.managers;
 
 import java.util.ArrayList;
 
-import pl.luxdev.lol.basic.Arena;
 import pl.luxdev.lol.basic.User;
+import pl.luxdev.lol.basic.game.Arena;
 
 public class ArenaManager {
 	

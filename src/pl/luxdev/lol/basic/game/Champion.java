@@ -1,4 +1,4 @@
-package pl.luxdev.lol.basic;
+package pl.luxdev.lol.basic.game;
 
 import pl.luxdev.lol.types.ChampType;
 

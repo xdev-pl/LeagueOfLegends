@@ -1,8 +1,9 @@
-package pl.luxdev.lol.basic;
+package pl.luxdev.lol.basic.game;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
+import pl.luxdev.lol.basic.Hologram;
 import pl.luxdev.lol.types.LineType;
 import pl.luxdev.lol.types.TeamType;
 

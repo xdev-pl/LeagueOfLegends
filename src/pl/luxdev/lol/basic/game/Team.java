@@ -1,4 +1,4 @@
-package pl.luxdev.lol.basic;
+package pl.luxdev.lol.basic.game;
 
 import java.util.ArrayList;
 import java.util.List;

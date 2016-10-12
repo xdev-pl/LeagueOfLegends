@@ -7,16 +7,16 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import pl.luxdev.lol.Main;
-import pl.luxdev.lol.basic.Turret;
 import pl.luxdev.lol.basic.User;
+import pl.luxdev.lol.basic.game.Turret;
 import pl.luxdev.lol.managers.TurretManager;
 import pl.luxdev.lol.managers.UserManager;
 
-public class MainGameLoop implements Runnable{
+public class MainGameTask implements Runnable{
 	
 
 	public static void start(){
-		Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new MainGameLoop(), 20, 15);
+		Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new MainGameTask(), 20, 15);
 	}
 
 	@Override

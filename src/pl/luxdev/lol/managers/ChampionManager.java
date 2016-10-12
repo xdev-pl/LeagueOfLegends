@@ -3,7 +3,7 @@ package pl.luxdev.lol.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.luxdev.lol.basic.Champion;
+import pl.luxdev.lol.basic.game.Champion;
 
 public class ChampionManager {
 	

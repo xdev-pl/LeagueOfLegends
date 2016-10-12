@@ -1,10 +1,11 @@
-package pl.luxdev.lol.basic;
+package pl.luxdev.lol.basic.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.entity.Player;
 
+import pl.luxdev.lol.basic.User;
 import pl.luxdev.lol.types.GameState;
 
 public class Arena {

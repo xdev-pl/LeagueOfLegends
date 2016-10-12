@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import com.connorlinfoot.titleapi.TitleAPI;
 
 import pl.luxdev.lol.basic.Hologram;
-import pl.luxdev.lol.basic.Turret;
 import pl.luxdev.lol.basic.User;
+import pl.luxdev.lol.basic.game.Turret;
 import pl.luxdev.lol.events.PlayerAttackTurretEvent;
 import pl.luxdev.lol.managers.UserManager;
 import pl.luxdev.lol.utils.Utils;

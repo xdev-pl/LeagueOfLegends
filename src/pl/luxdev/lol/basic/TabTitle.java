@@ -2,23 +2,24 @@ package pl.luxdev.lol.basic;
 
 import java.lang.reflect.Field;
 
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import net.minecraft.server.v1_10_R1.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_10_R1.PacketPlayOutPlayerListHeaderFooter;
+import pl.luxdev.lol.utils.PacketUtils;
+import pl.luxdev.lol.utils.Reflection;
 
 public class TabTitle {
+
 	
-	private PacketPlayOutPlayerListHeaderFooter headerfooter;
+	private Class<?> ChatSerializer = Reflection.getCraftClass("IChatBaseComponent$ChatSerializer");
+	private Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
 	private Field header;
 	private Field footer;
 
 	public TabTitle(String h){
-		headerfooter = new PacketPlayOutPlayerListHeaderFooter();
+		Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
 		try {
-			header = headerfooter.getClass().getDeclaredField("a");
-			footer = headerfooter.getClass().getDeclaredField("b");
+			header = headerfooter.getDeclaredField("a");
+			footer = headerfooter.getDeclaredField("b");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +35,7 @@ public class TabTitle {
 	
 	public void setHeader(String s){
 		try {
-			header.set(headerfooter, ChatSerializer.a(s));
+			header.set(headerfooter, ChatSerializer.getMethod("a").invoke(s));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,13 +43,13 @@ public class TabTitle {
 	
 	public void setFooter(String s){
 		try {
-			footer.set(headerfooter, ChatSerializer.a(s));
+			footer.set(headerfooter, ChatSerializer.getMethod("a").invoke(s));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void send(Player p){
-		((CraftPlayer) p).getHandle().playerConnection.sendPacket(headerfooter);
+		PacketUtils.sendPacket(p, headerfooter);
 	}
 }
