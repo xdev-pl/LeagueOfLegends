@@ -9,7 +9,7 @@ import pl.luxdev.lol.util.PacketUtils;
 import pl.luxdev.lol.util.Reflection;
 
 public class TabTitle {
-
+	
 	private static Class<?> ChatSerializer = Reflection.getCraftClass("IChatBaseComponent");
 	private static Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
 	private Object object;
@@ -17,15 +17,23 @@ public class TabTitle {
 	public TabTitle(String h, String f){
 		setHeaderFooter(h, f);
 	}
+	
 	public void setHeaderFooter(String h, String f) {
+		// TODO
+	}
+
+	public static void sendHeaderFooter(String h, String f, Player p) {
 		try {
 			Object header = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + h + "\"}");
 			Object footer = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + f + "\"}");
-			Constructor<?> contrustor = headerfooter.getConstructor(ChatSerializer);
-			object = contrustor.newInstance(header);
-			Field field = object.getClass().getDeclaredField("b");
+			Constructor<?> constructor = headerfooter.getConstructor(ChatSerializer);
+			
+			Object packet = constructor.newInstance(header);
+			Field field = packet.getClass().getDeclaredField("b");
 			field.setAccessible(true);
-			field.set(object, footer);;
+			field.set(packet, footer);
+			PacketUtils.sendPacket(p, packet);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
