@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import pl.luxdev.lol.Main;
-import pl.luxdev.lol.utils.PacketUtils;
-import pl.luxdev.lol.utils.Reflection;
+import pl.luxdev.lol.util.PacketUtils;
+import pl.luxdev.lol.util.Reflection;
 
 public class Hologram {
 

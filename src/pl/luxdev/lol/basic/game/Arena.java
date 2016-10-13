@@ -6,7 +6,7 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 import pl.luxdev.lol.basic.User;
-import pl.luxdev.lol.types.GameState;
+import pl.luxdev.lol.type.GameState;
 
 public class Arena {
 

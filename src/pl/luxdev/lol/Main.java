@@ -15,18 +15,19 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import pl.luxdev.lol.basic.CommandImpl;
-import pl.luxdev.lol.commands.TestCommand;
-import pl.luxdev.lol.listeners.EntityExplodeList;
-import pl.luxdev.lol.listeners.PlayerInteractList;
-import pl.luxdev.lol.listeners.PlayerInvClickList;
-import pl.luxdev.lol.listeners.PlayerJoinList;
-import pl.luxdev.lol.managers.ConfigManager;
-import pl.luxdev.lol.managers.DataManager;
-import pl.luxdev.lol.tasks.MainGameTask;
-import pl.luxdev.lol.utils.PacketUtils;
-import pl.luxdev.lol.utils.Reflection;
-import pl.luxdev.lol.utils.Utils;
+import pl.luxdev.lol.command.CommandImpl;
+import pl.luxdev.lol.command.TestCommand;
+import pl.luxdev.lol.listener.EntityExplodeList;
+import pl.luxdev.lol.listener.PlayerAchievementAwardedList;
+import pl.luxdev.lol.listener.PlayerInteractList;
+import pl.luxdev.lol.listener.PlayerInvClickList;
+import pl.luxdev.lol.listener.PlayerJoinList;
+import pl.luxdev.lol.manager.ConfigManager;
+import pl.luxdev.lol.manager.DataManager;
+import pl.luxdev.lol.task.MainGameTask;
+import pl.luxdev.lol.util.PacketUtils;
+import pl.luxdev.lol.util.Reflection;
+import pl.luxdev.lol.util.Utils;
 
 public class Main extends JavaPlugin {
 	
@@ -46,7 +47,9 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new PlayerJoinList(), this);
 		this.getServer().getPluginManager().registerEvents(new EntityExplodeList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerInvClickList(), this);
-		MainGameTask.start();
+		this.getServer().getPluginManager().registerEvents(new PlayerAchievementAwardedList(), this);
+		MainGameTask.startTask();
+		
 		for(Player p : Bukkit.getOnlinePlayers()){
 			Location loc = p.getLocation();
 			spawnTheShit(loc, p);

@@ -2,8 +2,8 @@ package pl.luxdev.lol.basic;
 
 import org.bukkit.entity.Player;
 
-import pl.luxdev.lol.types.ChampType;
-import pl.luxdev.lol.types.TeamType;
+import pl.luxdev.lol.type.ChampType;
+import pl.luxdev.lol.type.TeamType;
 
 public class User {
 

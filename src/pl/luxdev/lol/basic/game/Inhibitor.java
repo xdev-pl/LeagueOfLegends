@@ -2,7 +2,7 @@ package pl.luxdev.lol.basic.game;
 
 import org.bukkit.Location;
 
-import pl.luxdev.lol.types.TeamType;
+import pl.luxdev.lol.type.TeamType;
 
 public class Inhibitor {
 

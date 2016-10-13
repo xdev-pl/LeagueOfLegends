@@ -1,55 +1,40 @@
 package pl.luxdev.lol.basic;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import org.bukkit.entity.Player;
 
-import pl.luxdev.lol.utils.PacketUtils;
-import pl.luxdev.lol.utils.Reflection;
+import pl.luxdev.lol.util.PacketUtils;
+import pl.luxdev.lol.util.Reflection;
 
 public class TabTitle {
 
-	
-	private Class<?> ChatSerializer = Reflection.getCraftClass("IChatBaseComponent$ChatSerializer");
-	private Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
-	private Field header;
-	private Field footer;
-
-	public TabTitle(String h){
-		Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
-		try {
-			header = headerfooter.getDeclaredField("a");
-			footer = headerfooter.getDeclaredField("b");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		header.setAccessible(true);
-	    footer.setAccessible(true);
-	    setHeader(h);
-	}
+	private static Class<?> ChatSerializer = Reflection.getCraftClass("IChatBaseComponent");
+	private static Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
+	private Object object;
 	
 	public TabTitle(String h, String f){
-		this(h);
-	    setFooter(f);
+		setHeaderFooter(h, f);
 	}
-	
-	public void setHeader(String s){
+	public void setHeaderFooter(String h, String f) {
 		try {
-			header.set(headerfooter, ChatSerializer.getMethod("a").invoke(s));
+			Object header = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + h + "\"}");
+			Object footer = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + f + "\"}");
+			Constructor<?> contrustor = headerfooter.getConstructor(ChatSerializer);
+			object = contrustor.newInstance(header);
+			Field field = object.getClass().getDeclaredField("b");
+			field.setAccessible(true);
+			field.set(object, footer);;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void setFooter(String s){
-		try {
-			footer.set(headerfooter, ChatSerializer.getMethod("a").invoke(s));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void send(Player p){
-		PacketUtils.sendPacket(p, headerfooter);
+		if(object != null) PacketUtils.sendPacket(p, object);
+	}
+	public void startRandomColors() {
+		// TODO Some fun stuff, maybe later, idk yet :(
+		
 	}
 }

@@ -1,6 +1,6 @@
 package pl.luxdev.lol.basic.game;
 
-import pl.luxdev.lol.types.ChampType;
+import pl.luxdev.lol.type.ChampType;
 
 public class Champion {
 	
