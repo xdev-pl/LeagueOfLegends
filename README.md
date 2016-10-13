@@ -1,10 +1,10 @@
 # LeagueOfLegends
-League of Legends w minecraft, jest to projekt tworzony od 24 Sierpnia, od Tygodnia piszemy go razem.
+League of Legends w minecraft, jest to projekt tworzony od 24 sierpnia, od tygodnia piszemy go razem.
 
 Ekipa: @AdversTM @Dziksayu @ProgrammingWizard
 
-Mamy nadziejê, ¿e spróbujemy odtworzyæ rozgrywkê z Lola w minecraftcie, temat na forum: 
+Mamy nadziejÄ™, Å¼e sprÃ³bujemy odtworzyÄ‡ rozgrywkÄ™ z Lola w minecraftcie, temat na forum: 
 
 https://forum.lvlup.pro/t/projekt-leagueoflegends-w-minecraft/1187
 
-Aktualny poziom ukoñczenia: 15%
+Aktualny poziom ukoÅ„czenia: 15%
