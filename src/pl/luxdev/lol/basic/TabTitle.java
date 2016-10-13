@@ -1,5 +1,6 @@
 package pl.luxdev.lol.basic;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import org.bukkit.entity.Player;
@@ -9,47 +10,21 @@ import pl.luxdev.lol.utils.Reflection;
 
 public class TabTitle {
 
-	
-	private Class<?> ChatSerializer = Reflection.getCraftClass("IChatBaseComponent$ChatSerializer");
-	private Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
-	private Field header;
-	private Field footer;
+	private static Class<?> ChatSerializer = Reflection.getCraftClass("IChatBaseComponent");
+	private static Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
 
-	public TabTitle(String h){
-		Class<?> headerfooter = Reflection.getCraftClass("PacketPlayOutPlayerListHeaderFooter");
+	public static void sendHeaderFooter(String h, String f, Player p) {
 		try {
-			header = headerfooter.getDeclaredField("a");
-			footer = headerfooter.getDeclaredField("b");
+			Object header = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + h + "\"}");
+			Object footer = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + f + "\"}");
+			Constructor<?> contrustor = headerfooter.getConstructor(ChatSerializer);
+			Object packet = contrustor.newInstance(header);
+			Field field = packet.getClass().getDeclaredField("b");
+			field.setAccessible(true);
+			field.set(packet, footer);;
+			PacketUtils.sendPacket(p, packet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		header.setAccessible(true);
-	    footer.setAccessible(true);
-	    setHeader(h);
-	}
-	
-	public TabTitle(String h, String f){
-		this(h);
-	    setFooter(f);
-	}
-	
-	public void setHeader(String s){
-		try {
-			header.set(headerfooter, ChatSerializer.getMethod("a").invoke(s));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void setFooter(String s){
-		try {
-			footer.set(headerfooter, ChatSerializer.getMethod("a").invoke(s));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void send(Player p){
-		PacketUtils.sendPacket(p, headerfooter);
 	}
 }
