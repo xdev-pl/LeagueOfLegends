@@ -15,6 +15,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import pl.luxdev.lol.basic.ScoreBoard;
 import pl.luxdev.lol.command.CommandImpl;
 import pl.luxdev.lol.command.TestCommand;
 import pl.luxdev.lol.listener.EntityExplodeList;
@@ -48,7 +49,8 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new EntityExplodeList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerInvClickList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerAchievementAwardedList(), this);
-		MainGameTask.startTask();	
+		MainGameTask.startTask();
+		ScoreBoard.runTasks();
 		for(Player p : Bukkit.getOnlinePlayers()){
 			Location loc = p.getLocation();
 			spawnTheShit(loc, p);

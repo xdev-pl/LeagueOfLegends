@@ -5,9 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import com.connorlinfoot.titleapi.TitleAPI;
-
 import pl.luxdev.lol.basic.Hologram;
+import pl.luxdev.lol.basic.Title;
 import pl.luxdev.lol.basic.User;
 import pl.luxdev.lol.basic.game.Turret;
 import pl.luxdev.lol.event.PlayerAttackTurretEvent;
@@ -35,8 +34,8 @@ public class PlayerAttackTurretList implements Listener {
 			paramTurret.getHologram().delete();
 			paramTurret.setDestroyed(true);
 			for (Player p : Bukkit.getOnlinePlayers()) {
-				TitleAPI.sendFullTitle(p, 20, 20 * 5, 20 * 3, "§6Wieza wroga zniszona! §7(§6Linia: " + Utils.getTurretLine(paramTurret) + "§7)",
-						"§a+400 Gold");
+				Title title = new Title("§7(§6 " + paramTurret.getLine() + "§7) §6Wieza wroga zniszona!", "§a+400 Gold", 1,5,3);
+				title.send(p);
 			}
 		}
 		if (paramTurret.getHp() >= 10) {
