@@ -2,6 +2,7 @@ package pl.luxdev.lol.basic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -14,78 +15,95 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import pl.luxdev.lol.Main;
+import pl.luxdev.lol.type.ScoreBoardType;
 
 public class ScoreBoard {
-	
-	// TODO: do poprawy
+	// TODO: Config ?
+	private static final String[] TITLE = { "§eLeague of Legends", "§6League of Legends", "§eLeague of Legends" };
+	private static HashMap<ScoreBoardType, String[]> content = new HashMap<ScoreBoardType, String[]>();
+	static {
+		content.put(ScoreBoardType.LOBBY, new String[]{"§aLobby", "§22", "§33", "§44", "§55", "§66", "§77", "§88", "§99", "§010", "§a11", "§b12", "§c13", "§d14", "§e15                            "});
+		content.put(ScoreBoardType.GAME, new String[]{"§aGame", "§22", "§33", "§44", "§55", "§66", "§77", "§88", "§99", "§010", "§a11", "§b12", "§c13", "§d14", "§e15                            "});
+	} 
 	
 	private static final int MAXCHARS = 32;
-	private static int CONTENT_UPDATE_INTERVAL = 20;
-	private static int TITLE_UPDATE_INTERVAL = 10;
-	private static boolean UPDATE_CONTENT = true;
+	private static final int CONTENT_UPDATE_INTERVAL = 20;
+	private static final int TITLE_UPDATE_INTERVAL = 10;
+	private static final boolean UPDATE_CONTENT = true;
 	
-	private static List<String> chlist = new ArrayList<String>();
-	private static HashMap<Player, ScoreBoard> boards = new HashMap<Player, ScoreBoard>();
 	public static int contentTask = 0;
 	public static int titleTask = 0;
+	private static List<String> chlist = new ArrayList<String>();
+	private static HashMap<Player, ScoreBoard> boards = new HashMap<Player, ScoreBoard>();
 	
+	private Player player;
 	private Scoreboard board;
 	private Objective score;
-	private Player player;
-	private List<Team> teams = new ArrayList<Team>();
-	private HashMap<Team, String> lines = new HashMap<Team, String>();
-	private List<String> content = new ArrayList<String>();
-	private List<String> title = new ArrayList<String>();
-	private int index = 15;
+	private ScoreBoardType type;
+	private LinkedHashMap<Team, String> lines = new LinkedHashMap<Team, String>();
 	private int titleindex = 0;
 	
 	@SuppressWarnings("deprecation")
-	public ScoreBoard(Player p, String[] content, String[] title) {
+	private ScoreBoard(Player p, ScoreBoardType t) {
 		if(chlist.isEmpty()) addChars();
-		for(int i = 0; i < 15 ; i++) {
-			this.content.add(content[i]);
-		}
-		for(String s : title) {
-			this.title.add(s);
-		}
 		player = p;
-		titleindex = title.length;
-		if(boards.containsKey(p)) boards.remove(p);
+		type = t;
 		boards.put(p, this);
 		board = Bukkit.getScoreboardManager().getNewScoreboard();
 		score = board.registerNewObjective("score", "dummy");
 		score.setDisplaySlot(DisplaySlot.SIDEBAR);
-		score.setDisplayName(replaceString(this.title.get(0), player));
-		for(String s1 : content) {
-			Team t = board.registerNewTeam("Team:" + index);
-			OfflinePlayer op = Bukkit.getOfflinePlayer((String)chlist.get(this.index - 1));
-			t.addPlayer(op);
-			
-			lines.put(t, s1);
-			s1 = replaceString(s1, player);
-			if (s1.length() > MAXCHARS) s1 = s1.substring(0, MAXCHARS);
-			
-			String s2 = "";
-			if (s1.length() > 16) {
-				s2 = s1.substring(16, s1.length());
-				s1 = s1.substring(0, 16);
-				setSuffix(t, ChatColor.getLastColors(s1) + s2);
-			}
-			setPrefix(t, s1);
-			score.getScore(op).setScore(index);
-			teams.add(t);
-			index--;
+		score.setDisplayName(replaceString(TITLE[titleindex]));
+		
+		int index = 15;
+		for(String s : content.get(t)) {
+			Team team = board.registerNewTeam("Team:" + index);
+			OfflinePlayer op = Bukkit.getOfflinePlayer((String)chlist.get(index - 1));
+			team.addPlayer(op);
+			lines.put(team, s);
+			setContent(team, s);
+			score.getScore(op).setScore(index--);
 		}
 		player.setScoreboard(board);
-		runTasks();
+	}
+		
+	
+	public ScoreBoardType getType() {
+		return type;
 	}
 	
-	private void addChars() {
-		for(int i = 1; i < 10; i++) chlist.add("§" + i);
-		for(char c = 'a'; c < 'g'; c++) chlist.add("§" + c);
+	public void setType(ScoreBoardType t) {
+		int index = 0;
+		Team[] team = lines.keySet().toArray(new Team[lines.size()]);
+		for(String s : content.get(t)) {
+			lines.remove(team);
+			lines.put(team[index], s);
+			setContent(team[index++], s);
+		}
 	}
 	
-	private String replaceString(String s, Player p) {
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public void remove() {
+		boards.remove(player);
+		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+	}
+	
+	private void setContent(Team t, String s) {
+		s = replaceString(s);
+		if (s.length() > MAXCHARS) s = s.substring(0, MAXCHARS);
+		String s2 = "";
+		if (s.length() > 16) {
+			s2 = s.substring(16, s.length());
+			s = s.substring(0, 16);
+		}
+		setPrefix(t, s);
+		setSuffix(t, ChatColor.getLastColors(s) + s2);
+	}
+	
+	private String replaceString(String s) {
+		//TODO: Podmiana zmiennych
 		return s;
 	}
 	
@@ -99,65 +117,38 @@ public class ScoreBoard {
 		t.setPrefix(s);
 	}
 	
-	public void setContent(String[] content) {
-		this.content.clear();
-		for(int i = 0; i < 15 ; i++) {
-			this.content.add(content[i]);
+	private void addChars() {
+		for(int i = 1; i < 10; i++) chlist.add("§" + i);
+		for(char c = 'a'; c < 'g'; c++) chlist.add("§" + c);
+	}
+	
+	public static ScoreBoard get(Player p, ScoreBoardType t){
+		if(boards.containsKey(p)) {
+			ScoreBoard b = boards.get(p);
+			if(b.getType() != t) b.setType(t);
+			return b;
 		}
-		for(String s1 : content) {
-			lines.clear();
-			teams.clear();
-			
-			Team t = board.registerNewTeam("Team:" + index);
-			OfflinePlayer op = Bukkit.getOfflinePlayer((String)chlist.get(this.index - 1));
-			t.addPlayer(op);
-			
-			lines.put(t, s1);
-			s1 = replaceString(s1, player);
-			if (s1.length() > MAXCHARS) s1 = s1.substring(0, MAXCHARS);
-			
-			String s2 = "";
-			if (s1.length() > 16) {
-				s2 = s1.substring(16, s1.length());
-				s1 = s1.substring(0, 16);
-				setSuffix(t, ChatColor.getLastColors(s1) + s2);
-			}
-			setPrefix(t, s1);
-			score.getScore(op).setScore(index);
-			teams.add(t);
-			index--;
+		return new ScoreBoard(p, t);
+	}
+	
+	public static ScoreBoard get(Player p){
+		return get(p, ScoreBoardType.LOBBY);
+	}
+	
+	private void updateContent() {
+		for (Team t : lines.keySet()) {
+			setContent(t, lines.get(t));
 		}
 	}
 	
-	public void updateContent() {
-		for (Team t : teams) {
-			String s1 = lines.get(t);
-			s1 = replaceString(s1, player);
-			if (s1.length() > MAXCHARS) s1 = s1.substring(0, MAXCHARS);
-			
-			String s2 = "";
-			if (s1.length() > 16) {
-				s2 = s1.substring(16, s1.length());
-				s1 = s1.substring(0, 16);
-				setSuffix(t, ChatColor.getLastColors(s1) + s2);
-			}
-			setPrefix(t, s1);
-		}
-	}
-	
-	public void updateTitle() {
-		if (titleindex > title.size() - 1) titleindex = 0;
-		String s = replaceString(title.get(titleindex++), player);
+	private void updateTitle() {
+		if (titleindex > TITLE.length - 1) titleindex = 0;
+		String s = replaceString(TITLE[titleindex++]);
 		if (s.length() > MAXCHARS) s = s.substring(0, MAXCHARS);
 		score.setDisplayName(s);
 	}
-
-	public void remove() {
-		boards.remove(player);
-		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-	}
 	
-	public void runTasks() {
+	public static void runTasks() {
 		if(contentTask == 0) contentTask = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
 			@Override
 			public void run() {
@@ -165,8 +156,8 @@ public class ScoreBoard {
 					if (UPDATE_CONTENT) b.updateContent();
 				}
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					if ((boards.containsKey(player)) && (player.getScoreboard() == null)) {
-						new ScoreBoard(player, content.toArray(new String[content.size()]), title.toArray(new String[title.size()]));
+					if ((boards.containsKey(player)) && ((player.getScoreboard() == null) || boards.get(player) == null)) {
+						get(player).remove();
 					}
 				}
 			}

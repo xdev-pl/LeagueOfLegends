@@ -19,8 +19,10 @@ import pl.luxdev.lol.basic.Title;
 import pl.luxdev.lol.basic.User;
 import pl.luxdev.lol.manager.UserManager;
 import pl.luxdev.lol.type.ChampType;
+import pl.luxdev.lol.type.ScoreBoardType;
 import pl.luxdev.lol.type.TeamType;
 import pl.luxdev.lol.util.ItemCrafter;
+import pl.luxdev.lol.util.ProfileLoader;
 
 public class PlayerJoinList implements Listener {
 	
@@ -46,7 +48,9 @@ public class PlayerJoinList implements Listener {
 		bar.addPlayer(p);
 		tab.send(p);
 		title.send(p);
-		createScoreboard(p);
+		runTask(ScoreBoard.get(p));
+		ProfileLoader profile = new ProfileLoader(p.getUniqueId().toString(), p.getName(), "skkf");
+		profile.loadProfile();
 	}
 	
 	private void addItems(Player p) {
@@ -56,26 +60,17 @@ public class PlayerJoinList implements Listener {
 		inv.setItem(8, RedTeamPicker);
 	}
 	
-	private void createScoreboard(Player p) {
-		String[] content = { "§aTEST: 1337", "§22", "§33", "§44", "§55", "§66", "§77", "§88", "§99", "§010", "§a11", "§b12", "§c13", "§d14", "§e15                            "};
-		String[] title = { "§eLeague of Legends", "§6League of Legends", "§eLeague of Legends" };
-		ScoreBoard sb = new ScoreBoard(p, content, title);
-		runTask(sb);
-	}
-	
-	// TEST
+	//TEST
 	private void runTask(ScoreBoard sb) {
-		ArrayList<String[]> content = new ArrayList<String[]>();
-		content.add(new String[]{"§1TEST: 1337", "§22", "§33", "§44", "§55", "§66", "§77", "§88", "§99", "§010", "§a11", "§b12", "§c13", "§d14", "§e15                            "});
-		content.add(new String[]{"§2TEST: 1337", "§32", "§43", "§54", "§65", "§76", "§87", "§98", "§09", "§a10", "§b11", "§c12", "§d13", "§e14", "§f15                            "});
-		content.add(new String[]{"§3TEST: 1337", "§42", "§53", "§64", "§75", "§86", "§97", "§08", "§a9", "§b10", "§c11", "§d12", "§e13", "§f14", "§a15                            "});
 		Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new Runnable(){
-			int i = 0;
+			boolean b = true;
 			@Override
 			public void run() {
-				if(i > content.size() - 1) i = 0;
-				sb.setContent(content.get(i++));
+				if(b) sb.setType(ScoreBoardType.GAME);
+				else sb.setType(ScoreBoardType.LOBBY);
+				b = !b;
 			}
-		}, 0, 20);
+			
+		}, 0, 40);
 	}
 }
