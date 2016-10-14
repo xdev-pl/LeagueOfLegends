@@ -17,6 +17,8 @@ import pl.luxdev.lol.Main;
 
 public class ScoreBoard {
 	
+	// TODO: do poprawy
+	
 	private static final int MAXCHARS = 32;
 	private static int CONTENT_UPDATE_INTERVAL = 20;
 	private static int TITLE_UPDATE_INTERVAL = 10;
@@ -39,15 +41,16 @@ public class ScoreBoard {
 	
 	@SuppressWarnings("deprecation")
 	public ScoreBoard(Player p, String[] content, String[] title) {
-		if(chlist.size() < 1) addChars();
-		for (String s : content) {
-			this.content.add(s);
+		if(chlist.isEmpty()) addChars();
+		for(int i = 0; i < 15 ; i++) {
+			this.content.add(content[i]);
 		}
-		for (String s : title) {
+		for(String s : title) {
 			this.title.add(s);
 		}
 		player = p;
 		titleindex = title.length;
+		if(boards.containsKey(p)) boards.remove(p);
 		boards.put(p, this);
 		board = Bukkit.getScoreboardManager().getNewScoreboard();
 		score = board.registerNewObjective("score", "dummy");
@@ -78,24 +81,11 @@ public class ScoreBoard {
 	}
 	
 	private void addChars() {
-		chlist.add("§1");
-		chlist.add("§2");
-		chlist.add("§3");
-		chlist.add("§4");
-		chlist.add("§5");
-		chlist.add("§6");
-		chlist.add("§7");
-		chlist.add("§8");
-		chlist.add("§9");
-		chlist.add("§a");
-		chlist.add("§b");
-		chlist.add("§c");
-		chlist.add("§d");
-		chlist.add("§e");
-		chlist.add("§f");
+		for(int i = 1; i < 10; i++) chlist.add("§" + i);
+		for(char c = 'a'; c < 'g'; c++) chlist.add("§" + c);
 	}
 	
-	private String replaceString(String s, Player player2) {
+	private String replaceString(String s, Player p) {
 		return s;
 	}
 	
@@ -107,6 +97,36 @@ public class ScoreBoard {
 	private void setPrefix(Team t, String s) {
 		if (s.length() > 16) s = s.substring(0, 16);
 		t.setPrefix(s);
+	}
+	
+	public void setContent(String[] content) {
+		this.content.clear();
+		for(int i = 0; i < 15 ; i++) {
+			this.content.add(content[i]);
+		}
+		for(String s1 : content) {
+			lines.clear();
+			teams.clear();
+			
+			Team t = board.registerNewTeam("Team:" + index);
+			OfflinePlayer op = Bukkit.getOfflinePlayer((String)chlist.get(this.index - 1));
+			t.addPlayer(op);
+			
+			lines.put(t, s1);
+			s1 = replaceString(s1, player);
+			if (s1.length() > MAXCHARS) s1 = s1.substring(0, MAXCHARS);
+			
+			String s2 = "";
+			if (s1.length() > 16) {
+				s2 = s1.substring(16, s1.length());
+				s1 = s1.substring(0, 16);
+				setSuffix(t, ChatColor.getLastColors(s1) + s2);
+			}
+			setPrefix(t, s1);
+			score.getScore(op).setScore(index);
+			teams.add(t);
+			index--;
+		}
 	}
 	
 	public void updateContent() {
@@ -139,6 +159,7 @@ public class ScoreBoard {
 	
 	public void runTasks() {
 		if(contentTask == 0) contentTask = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
+			@Override
 			public void run() {
 				for (ScoreBoard b : boards.values()) {
 					if (UPDATE_CONTENT) b.updateContent();
@@ -152,6 +173,7 @@ public class ScoreBoard {
 		}, 0L, CONTENT_UPDATE_INTERVAL).getTaskId();
 			
 		if(titleTask == 0) titleTask = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
+			@Override
 			public void run() {
 				for (ScoreBoard b : boards.values()) {
 					b.updateTitle();

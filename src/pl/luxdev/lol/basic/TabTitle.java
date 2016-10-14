@@ -15,25 +15,18 @@ public class TabTitle {
 	private Object object;
 	
 	public TabTitle(String h, String f){
-		setHeaderFooter(h, f);
-	}
-	
-	public void setHeaderFooter(String h, String f) {
-		// TODO
+		sendHeaderFooter(h, f);
 	}
 
-	public static void sendHeaderFooter(String h, String f, Player p) {
+	public void sendHeaderFooter(String h, String f) {
 		try {
 			Object header = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + h + "\"}");
 			Object footer = ChatSerializer.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + f + "\"}");
 			Constructor<?> constructor = headerfooter.getConstructor(ChatSerializer);
-			
-			Object packet = constructor.newInstance(header);
-			Field field = packet.getClass().getDeclaredField("b");
+			object = constructor.newInstance(header);
+			Field field = object.getClass().getDeclaredField("b");
 			field.setAccessible(true);
-			field.set(packet, footer);
-			PacketUtils.sendPacket(p, packet);
-
+			field.set(object, footer);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -71,6 +71,7 @@ public class ActionBar {
 	
 	public static void runTask() {
 		if(task == 0) task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable(){
+			@Override
 			public void run() {
 				for(ActionBar b : bars) {
 					b.send();

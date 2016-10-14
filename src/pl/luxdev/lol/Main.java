@@ -48,8 +48,7 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new EntityExplodeList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerInvClickList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerAchievementAwardedList(), this);
-		MainGameTask.startTask();
-		
+		MainGameTask.startTask();	
 		for(Player p : Bukkit.getOnlinePlayers()){
 			Location loc = p.getLocation();
 			spawnTheShit(loc, p);

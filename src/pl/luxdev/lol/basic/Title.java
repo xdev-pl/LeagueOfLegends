@@ -1,88 +1,60 @@
 package pl.luxdev.lol.basic;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import pl.luxdev.lol.util.PacketUtils;
+import pl.luxdev.lol.util.Reflection;
+
 public class Title {
-
-	/*public void send(Player player) {
-		if (packetTitle != null) {
-			// First reset previous settings
-			resetTitle(player);
-			try {
-				// Send timings first
-				Object handle = getHandle(player);
-				Object connection = getField(handle.getClass(),
-						"playerConnection").get(handle);
-				Object[] actions = packetActions.getEnumConstants();
-				Method sendPacket = getMethod(connection.getClass(),
-						"sendPacket");
-				Object packet = packetTitle.getConstructor(packetActions,
-						chatBaseComponent, Integer.TYPE, Integer.TYPE,
-						Integer.TYPE).newInstance(actions[2], null,
-						fadeInTime * (ticks ? 1 : 20),
-						stayTime * (ticks ? 1 : 20),
-						fadeOutTime * (ticks ? 1 : 20));
-				// Send if set
-				if (fadeInTime != -1 && fadeOutTime != -1 && stayTime != -1)
-					sendPacket.invoke(connection, packet);
-
-				// Send title
-				Object serialized = nmsChatSerializer.getConstructor(
-						String.class).newInstance(
-						ChatColor.translateAlternateColorCodes('&', title));
-				packet = packetTitle.getConstructor(packetActions,
-						chatBaseComponent).newInstance(actions[0], serialized);
-				sendPacket.invoke(connection, packet);
-				if (subtitle != "") {
-					// Send subtitle if present
-					serialized = nmsChatSerializer.getConstructor(String.class)
-							.newInstance(
-									ChatColor.translateAlternateColorCodes('&',
-											subtitle));
-					packet = packetTitle.getConstructor(packetActions,
-							chatBaseComponent).newInstance(actions[1],
-							serialized);
-					sendPacket.invoke(connection, packet);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+	
+	private static Class<?> PacketPlayOutTitle = Reflection.getCraftClass("PacketPlayOutTitle");
+	private static Class<?> IChatBaseComponent = Reflection.getCraftClass("IChatBaseComponent");
+	private static Class<?> PacketActions = Reflection.getCraftClass("PacketPlayOutTitle$EnumTitleAction");
+	private static Class<?> ChatSerializer = Reflection.getCraftClass("ChatComponentText");
+	private int fadeIn;
+	private int fadeOut;
+	private int time;
+	private String title;
+	private String subtitle;
+	
+	private Object packet;
+	
+	public Title(String title, String subtitle, int fadeIn, int fadeOut, int time){
+		this.fadeIn = fadeIn;
+		this.fadeOut = fadeOut;
+		this.time = time;
+		this.title = title;
+		this.subtitle = subtitle;
+	}
+	public void send(Player p){
+		try{
+			
+			
+			
+			Object[] actions = PacketActions.getEnumConstants();
+			packet = PacketPlayOutTitle.getConstructor(PacketActions, IChatBaseComponent, Integer.TYPE, Integer.TYPE, Integer.TYPE).newInstance(actions[2], null, fadeIn * 20, time * 20, fadeOut * 20);
+			PacketUtils.sendPacket(p, packet);
+			Object serialized = ChatSerializer.getConstructor(String.class).newInstance(title);
+			packet = PacketPlayOutTitle.getConstructor(PacketActions, IChatBaseComponent).newInstance(actions[0], serialized);
+			PacketUtils.sendPacket(p, packet);
+			if(subtitle != ""){
+				serialized = ChatSerializer.getConstructor(String.class).newInstance(subtitle);
+				packet = PacketPlayOutTitle.getConstructor(PacketActions, IChatBaseComponent).newInstance(actions[1], serialized);
+				PacketUtils.sendPacket(p, packet);
 			}
-		}
-	}
-	public void clearTitle(Player player) {
-		try {
-			// Send timings first
-			Object handle = getHandle(player);
-			Object connection = getField(handle.getClass(), "playerConnection")
-					.get(handle);
-			Object[] actions = packetActions.getEnumConstants();
-			Method sendPacket = getMethod(connection.getClass(), "sendPacket");
-			Object packet = packetTitle.getConstructor(packetActions,
-					chatBaseComponent).newInstance(actions[3], null);
-			sendPacket.invoke(connection, packet);
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	public void resetTitle(Player player) {
-		try {
-			// Send timings first
-			Object handle = getHandle(player);
-			Object connection = getField(handle.getClass(), "playerConnection")
-					.get(handle);
-			Object[] actions = packetActions.getEnumConstants();
-			Method sendPacket = getMethod(connection.getClass(), "sendPacket");
-			Object packet = packetTitle.getConstructor(packetActions,
-					chatBaseComponent).newInstance(actions[4], null);
-			sendPacket.invoke(connection, packet);
-		} catch (Exception e) {
+	public void resetTitleSubTitle(Player p){
+		try{
+			Object[] actions = PacketActions.getEnumConstants();
+			packet = PacketPlayOutTitle.getConstructor(PacketActions, IChatBaseComponent, Integer.TYPE, Integer.TYPE, Integer.TYPE).newInstance(actions[2], null, null, null, null);
+			PacketUtils.sendPacket(p, packet);
+			packet = PacketPlayOutTitle.getConstructor(PacketActions, IChatBaseComponent).newInstance(actions[0], null);
+			PacketUtils.sendPacket(p, packet);
+		}catch(Exception e){
 			e.printStackTrace();
 		}
-	*/}
+	}
+}

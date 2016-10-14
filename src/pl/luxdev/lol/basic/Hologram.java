@@ -16,8 +16,8 @@ import pl.luxdev.lol.util.Reflection;
 public class Hologram {
 
 	/*
-	 * Holograms By Dzikoysk Dziku najlepszy programista nie bedzie zly na mnie
-	 * ;) :3 <3
+	 * Holograms By Dzikoysk (github.com/dzikoysk)
+	 * Dzikoysk najlepszy programista nie bedzie zly na mnie (chyba :C)
 	 */
 
 	private final static List<Hologram> holograms = new ArrayList<>();
