@@ -2,6 +2,6 @@ package pl.luxdev.lol.type;
 
 public enum TeamType {
 	
-	BLUE, RED;
+	BLUE, RED, NONE;
 
 }

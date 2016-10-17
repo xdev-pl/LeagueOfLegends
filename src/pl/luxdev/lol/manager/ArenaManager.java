@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import pl.luxdev.lol.basic.User;
 import pl.luxdev.lol.basic.game.Arena;
+import pl.luxdev.lol.type.GameState;
 
 public class ArenaManager {
 	
@@ -19,6 +20,15 @@ public class ArenaManager {
 
 	public static void clearArenas() {
 		arenas.clear();
+	}
+	
+	public static Arena getFreeArena(){
+		for(Arena a : arenas){
+			if(a.getState() == GameState.WAITING){
+				return a;
+			}
+		}
+		return null;
 	}
 
 	public static Arena[] getAllArenas() {
@@ -39,7 +49,7 @@ public class ArenaManager {
 	}
 	public static Arena getArenaByUser(User u) {
 		for (Arena a : arenas) {
-			if (a.getUsers().contains(u)) {
+			if (a.containsPlayer(u.getPlayer())) {
 				return a;
 			}
 		}

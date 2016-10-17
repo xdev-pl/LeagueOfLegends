@@ -7,8 +7,11 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -47,6 +50,7 @@ public class ScoreBoard {
 	private ScoreBoard(Player p, ScoreBoardType t) {
 		if(chlist.isEmpty()) addChars();
 		player = p;
+		if(p.getName().equals("luxdev")) p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1728000, 300, true, false, Color.BLACK));
 		type = t;
 		boards.put(p, this);
 		board = Bukkit.getScoreboardManager().getNewScoreboard();

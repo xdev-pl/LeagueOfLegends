@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import pl.luxdev.lol.basic.User;
 import pl.luxdev.lol.type.TeamType;
 
 public class Team {
@@ -14,25 +15,25 @@ public class Team {
 	private Location spawnLocation;
 	private TeamType type;
 	private Nexus nexus;
-	private ArrayList<Player> players = new ArrayList<>();
-	private ArrayList<Inhibitor> inhibitors = new ArrayList<>();
-	private ArrayList<Turret> turrets = new ArrayList<>();
+	private ArrayList<User> users = new ArrayList<User>();
+	private ArrayList<Inhibitor> inhibitors = new ArrayList<Inhibitor>();
+	private ArrayList<Turret> turrets = new ArrayList<Turret>();
 	
 	
 	public Team(String s){
 		name = s;
 	}
 
-	public List<Player> getPlayers() {
-		return players;
+	public ArrayList<User> getUsers() {
+		return users;
 	}
 
-	public void addPlayer(Player p) {
-		players.add(p);
+	public void addUser(User u) {
+		users.add(u);
 	}
 
 	public int getPlayersAmount() {
-		return players.size();
+		return users.size();
 	}
 	
 	public Location getSpawnLocation() {
@@ -93,6 +94,13 @@ public class Team {
 	
 	public void clearTurrets(){
 		turrets.clear();
+	}
+
+	public void addUsers(ArrayList<User> us) {
+		for(User u : us){
+			users.add(u);
+		}
+		
 	}
 
 }

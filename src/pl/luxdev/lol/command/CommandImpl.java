@@ -15,6 +15,7 @@ public class CommandImpl {
 	public static void registerCommands(Command... commands) {
 		for (Command command : commands) {
 			registerCommand(command);
+			Bukkit.broadcastMessage("[CommandImpl.java:18] Registring command: " + command);
 		}
 	}
 

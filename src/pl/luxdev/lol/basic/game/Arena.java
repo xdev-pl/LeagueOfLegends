@@ -13,7 +13,7 @@ public class Arena {
 	private final String name;
 	private String displayName;
 	private GameState state;
-	private List<User> users = new ArrayList<>();
+	//private List<User> users = new ArrayList<>();
 	private List<Team> teams = new ArrayList<>(2);
 	
 	public Arena(String name) {
@@ -53,7 +53,7 @@ public class Arena {
 		if(teams.contains(t)) teams.remove(t);
 	}
 	
-	public List<User> getUsers() {
+/*	public List<User> getUsers() {
 		return users;
 	}
 	
@@ -68,11 +68,13 @@ public class Arena {
 	public void clearUsers() {
 		users.clear();
 	}
-	
+*/	
 	public boolean containsPlayer(Player p) {
-		for (User u : users){
-			if (u.getPlayer().equals(p)) {
-				return true;
+		for(Team t : teams){
+			for(User u : t.getUsers()){
+				if (u.getPlayer().equals(p)) {
+					return true;
+				}
 			}
 		}
 		return false;

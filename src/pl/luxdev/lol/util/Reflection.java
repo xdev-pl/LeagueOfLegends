@@ -78,6 +78,12 @@ public final class Reflection {
             return getField(target.getSuperclass(), name);
         throw new IllegalArgumentException("Cannot find field with type");
     }
+	public static boolean isInClass(Method[] methods, String methodName){
+		for (Method m : methods)
+			if (m.getName() == methodName)
+				return true;
+		return false;
+	}
 
     private static <T> FieldAccessor<T> getField(Class<?> target, String name, Class<T> fieldType, int index) {
         for (final Field field : target.getDeclaredFields()) {

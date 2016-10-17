@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.luxdev.lol.basic.ScoreBoard;
 import pl.luxdev.lol.command.CommandImpl;
 import pl.luxdev.lol.command.TestCommand;
+import pl.luxdev.lol.listener.AsyncPlayerChatList;
 import pl.luxdev.lol.listener.EntityExplodeList;
 import pl.luxdev.lol.listener.PlayerAchievementAwardedList;
 import pl.luxdev.lol.listener.PlayerInteractList;
@@ -49,12 +50,11 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new EntityExplodeList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerInvClickList(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerAchievementAwardedList(), this);
+		this.getServer().getPluginManager().registerEvents(new AsyncPlayerChatList(), this);
 		MainGameTask.startTask();
 		ScoreBoard.runTasks();
-		for(Player p : Bukkit.getOnlinePlayers()){
-			Location loc = p.getLocation();
-			spawnTheShit(loc, p);
-		}
+		regCommands();
+		
 	}
 	private void spawnTheShit(Location loc, Player all){
 		Class<?> EntityLiving = Reflection.getCraftClass("EntityLiving");

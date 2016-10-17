@@ -15,8 +15,5 @@ public class PlayerInvClickList implements Listener {
 		if(e.getCurrentItem() == null) return;
 		Player p = (Player) e.getWhoClicked();
 		User u = UserManager.getUser(p.getName());
-		if (e.getCurrentItem().equals(PlayerJoinList.BlueTeamPicker)) {
-			// TODO
-		}
 	}
 }

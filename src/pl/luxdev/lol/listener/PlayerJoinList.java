@@ -1,15 +1,13 @@
 package pl.luxdev.lol.listener;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import pl.luxdev.lol.Main;
 import pl.luxdev.lol.basic.ActionBar;
@@ -23,43 +21,36 @@ import pl.luxdev.lol.type.ScoreBoardType;
 import pl.luxdev.lol.type.TeamType;
 import pl.luxdev.lol.util.ItemCrafter;
 import pl.luxdev.lol.util.ProfileLoader;
+import pl.luxdev.lol.util.Utils;
 
 public class PlayerJoinList implements Listener {
-	
-	public static ItemStack BlueTeamPicker = ItemCrafter.createItem(Material.WOOL, 1, (short) 3, ("§8[§6Wybierz Team§8]"), ("§7Druzyna: §bNiebiescy"));
-	public static ItemStack RedTeamPicker = ItemCrafter.createItem(Material.WOOL, 1, (short) 14, ("§8[§6Wybierz Team§8]"), ("§7Druzna: §cCzerowni"));
-	private static ActionBar bar = new ActionBar("§dMorda w ziemie i kielkujesz.");
+
+	public static final ItemStack JOIN_ITEM = ItemCrafter.createItem(Material.NETHER_STAR, 1, (short) 0, Utils.fixColors("&8&l[ &a&lDolacz &8&l]"), Utils.fixColors("&7Kliknij, aby dolaczyc do kolejki."));
+	private final ActionBar bar = new ActionBar("§c§lMorda w ziemie i kielkujesz.");
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e){
 		Player p = e.getPlayer();
 		p.setHealth(p.getMaxHealth());
 		p.setFoodLevel(20); //TODO
+		PlayerInventory i = p.getInventory();
+		i.clear();
+		i.setHeldItemSlot(4);
+		i.setItem(4, JOIN_ITEM);
+		
 		User u = new User(p);
 		UserManager.addUser(u);
 		u.setChampion(ChampType.YASUO);
-		u.setTeam(TeamType.BLUE);
-		p.sendMessage("Witaj " + p.getName() + " Twoje ustawienia narzucone przez serwer: ");
-		p.sendMessage("Postac: " + u.getChampion());
-		p.sendMessage("Druzyna " + u.getTeam());
-		//addItems(p);
-		TabTitle tab = new TabTitle("§dWitaj na serwerze", "§5League Of Legends!");
-		Title title = new Title("§dWitamy", "§5XD Prodakszyn", 10, 10, 30);
+		u.setTeam(TeamType.NONE);
+		TabTitle tab = new TabTitle("§2Witaj na serwerze \n Grzybie", "§5League Of Legends!");
+		Title title = new Title("§6§lWitamy", "§a§lXD Prodakshön", 10, 10, 30);
 		bar.addPlayer(p);
 		tab.send(p);
 		title.send(p);
-		runTask(ScoreBoard.get(p));
+		runTask(ScoreBoard.get(p)); //test
 		ProfileLoader profile = new ProfileLoader(p.getUniqueId().toString(), p.getName(), "skkf");
 		profile.loadProfile();
 	}
-	
-	private void addItems(Player p) {
-		Inventory inv = p.getInventory();
-		inv.clear();
-		inv.setItem(0, BlueTeamPicker);
-		inv.setItem(8, RedTeamPicker);
-	}
-	
 	//TEST
 	private void runTask(ScoreBoard sb) {
 		Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new Runnable(){
