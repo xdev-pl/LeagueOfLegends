@@ -15,21 +15,22 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import pl.luxdev.lol.basic.ScoreBoard;
 import pl.luxdev.lol.command.CommandImpl;
 import pl.luxdev.lol.command.TestCommand;
+import pl.luxdev.lol.data.ConfigManager;
+import pl.luxdev.lol.data.DataManager;
 import pl.luxdev.lol.listener.AsyncPlayerChatList;
 import pl.luxdev.lol.listener.EntityExplodeList;
 import pl.luxdev.lol.listener.PlayerAchievementAwardedList;
 import pl.luxdev.lol.listener.PlayerInteractList;
 import pl.luxdev.lol.listener.PlayerInvClickList;
 import pl.luxdev.lol.listener.PlayerJoinList;
-import pl.luxdev.lol.manager.ConfigManager;
-import pl.luxdev.lol.manager.DataManager;
-import pl.luxdev.lol.task.MainGameTask;
-import pl.luxdev.lol.util.PacketUtils;
-import pl.luxdev.lol.util.Reflection;
+import pl.luxdev.lol.system.DrawSystem;
+import pl.luxdev.lol.system.task.MainGameTask;
 import pl.luxdev.lol.util.Utils;
+import pl.luxdev.lol.util.element.ScoreBoard;
+import pl.luxdev.lol.util.reflect.PacketUtils;
+import pl.luxdev.lol.util.reflect.Reflection;
 
 public class Main extends JavaPlugin {
 	
@@ -53,10 +54,11 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new AsyncPlayerChatList(), this);
 		MainGameTask.startTask();
 		ScoreBoard.runTasks();
+		DrawSystem.runTask();
 		regCommands();
 		
 	}
-	private void spawnTheShit(Location loc, Player all){
+	public void spawnTheShit(Location loc, Player all){
 		Class<?> EntityLiving = Reflection.getCraftClass("EntityLiving");
 		Class<?> EntityZombie = Reflection.getCraftClass("EntityZombie");
 		Class<?> packetLivingClass = Reflection.getCraftClass("PacketPlayOutSpawnEntityLiving");

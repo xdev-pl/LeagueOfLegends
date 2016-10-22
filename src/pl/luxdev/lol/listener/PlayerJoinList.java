@@ -10,18 +10,18 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import pl.luxdev.lol.Main;
-import pl.luxdev.lol.basic.ActionBar;
-import pl.luxdev.lol.basic.ScoreBoard;
-import pl.luxdev.lol.basic.TabTitle;
-import pl.luxdev.lol.basic.Title;
 import pl.luxdev.lol.basic.User;
-import pl.luxdev.lol.manager.UserManager;
+import pl.luxdev.lol.basic.manager.UserManager;
 import pl.luxdev.lol.type.ChampType;
 import pl.luxdev.lol.type.ScoreBoardType;
 import pl.luxdev.lol.type.TeamType;
 import pl.luxdev.lol.util.ItemCrafter;
 import pl.luxdev.lol.util.ProfileLoader;
 import pl.luxdev.lol.util.Utils;
+import pl.luxdev.lol.util.element.ActionBar;
+import pl.luxdev.lol.util.element.ScoreBoard;
+import pl.luxdev.lol.util.element.TabTitle;
+import pl.luxdev.lol.util.element.Title;
 
 public class PlayerJoinList implements Listener {
 

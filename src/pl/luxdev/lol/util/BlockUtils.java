@@ -26,6 +26,7 @@ public class BlockUtils {
         blockAirFoliageSet.add((byte) 142);
     }
 	
+	@SuppressWarnings("deprecation")
 	public static boolean airFoliage(Block block) {
         if (block == null)
             return false;

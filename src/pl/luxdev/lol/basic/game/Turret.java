@@ -3,9 +3,9 @@ package pl.luxdev.lol.basic.game;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-import pl.luxdev.lol.basic.Hologram;
 import pl.luxdev.lol.type.LineType;
 import pl.luxdev.lol.type.TeamType;
+import pl.luxdev.lol.util.element.Hologram;
 
 public class Turret {
 	

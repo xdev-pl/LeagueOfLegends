@@ -51,7 +51,8 @@ public class ProfileLoader {
 	            uc.addRequestProperty("Pragma", "no-cache");
 
 	            // Parse it
-	            String json = new Scanner(uc.getInputStream(), "UTF-8").useDelimiter("\\A").next();
+	            Scanner sc = new Scanner(uc.getInputStream(), "UTF-8");
+	            String json = sc.useDelimiter("\\A").next();
 	            JSONParser parser = new JSONParser();
 	            Object obj = parser.parse(json);
 	            JSONArray properties = (JSONArray) ((JSONObject) obj).get("properties");
@@ -70,6 +71,7 @@ public class ProfileLoader {
 	                    Bukkit.getLogger().log(Level.WARNING, "Failed to apply auth property", e);
 	                }
 	            }
+	            sc.close();
 	        } catch (Exception e) {
 	        }
 	    }

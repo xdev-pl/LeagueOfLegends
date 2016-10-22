@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import pl.luxdev.lol.basic.ScoreBoard;
+import pl.luxdev.lol.util.element.ScoreBoard;
 
 public class PlayerQuitList implements Listener {
 	

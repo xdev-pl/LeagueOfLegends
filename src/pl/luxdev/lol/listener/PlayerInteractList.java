@@ -10,10 +10,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.PlayerInventory;
 
 import pl.luxdev.lol.basic.game.Turret;
-import pl.luxdev.lol.draw.DrawSystem;
-import pl.luxdev.lol.event.PlayerAttackTurretEvent;
-import pl.luxdev.lol.manager.TurretManager;
-import pl.luxdev.lol.manager.UserManager;
+import pl.luxdev.lol.basic.manager.TurretManager;
+import pl.luxdev.lol.basic.manager.UserManager;
+import pl.luxdev.lol.system.DrawSystem;
+import pl.luxdev.lol.system.event.PlayerAttackTurretEvent;
 
 public class PlayerInteractList implements Listener {
 

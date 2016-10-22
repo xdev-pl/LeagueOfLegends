@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import pl.luxdev.lol.basic.BorderScreenBlur;
+import pl.luxdev.lol.util.element.BorderScreenBlur;
 
 public class TestCommand extends CommandAPI {
 	

@@ -5,15 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import pl.luxdev.lol.basic.Hologram;
-import pl.luxdev.lol.basic.Title;
 import pl.luxdev.lol.basic.User;
 import pl.luxdev.lol.basic.game.Turret;
-import pl.luxdev.lol.event.PlayerAttackTurretEvent;
-import pl.luxdev.lol.manager.UserManager;
-import pl.luxdev.lol.util.Utils;
+import pl.luxdev.lol.basic.manager.UserManager;
+import pl.luxdev.lol.system.event.PlayerAttackTurretEvent;
+import pl.luxdev.lol.util.element.Hologram;
+import pl.luxdev.lol.util.element.Title;
 
-@SuppressWarnings("deprecation")
 public class PlayerAttackTurretList implements Listener {
 
 	@EventHandler

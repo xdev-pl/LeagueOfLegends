@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import pl.luxdev.lol.basic.User;
-import pl.luxdev.lol.manager.UserManager;
+import pl.luxdev.lol.basic.manager.UserManager;
 
 public class PlayerInvClickList implements Listener {
 	
