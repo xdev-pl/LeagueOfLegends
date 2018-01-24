@@ -1,13 +1,3 @@
-/*
- * 
- * Projekt pisany przez:
- * AdversTM, luxDev, ProgrammingWizard (_an0)
- * Aktualnie piszemy wszystko od podstaw, a an0 sie oper*ala (jeszcze C:)
- * Zobaczymy co z tego wyjdzie, liczymy na cos ciekawego.
- * Wszystko co tu jest, moze ulec zmianie w kazdej chwili, lux zdaje sobie sprawe z optymalnosci kodu (RIP).
- * 
- * 
- */
 package pl.luxdev.lol;
 
 import org.bukkit.Bukkit;
@@ -80,7 +70,6 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable(){
 		// TODO: save
-		// TODO: Przestan robic "TODO" tylko cos zrob! iksde
 	}
 	private void regCommands(){
 		CommandImpl.registerCommands(new TestCommand());
